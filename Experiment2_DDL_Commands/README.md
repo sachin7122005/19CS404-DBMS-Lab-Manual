@@ -270,6 +270,8 @@ foreign key(OrderID) references Orders(OrderID));
 
 ![image](https://github.com/user-attachments/assets/43ab6c25-6206-42bc-a192-ec52eb6a17d6)
 
+## GRADE
+![image](https://github.com/user-attachments/assets/f517a877-e237-457f-822d-a8adcd66f48f)
 
 
 ## RESULT
