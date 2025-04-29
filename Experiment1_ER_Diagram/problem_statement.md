@@ -45,28 +45,133 @@ Design a database for patient management, appointments, medical records, and bil
    - Why you chose the entities and relationships.
    - How you modeled prerequisites or billing.
 
-# ER Diagram Submission - Student Name
+# ER Diagram Submission - RAGUL T R
 
 ## Scenario Chosen:
-University / Hospital (choose one)
+University 
 
 ## ER Diagram:
-![ER Diagram](er_diagram.png)
+[Screenshot 2025-03-04 091225 (1).pdf](https://github.com/user-attachments/files/19954423/Screenshot.2025-03-04.091225.1.pdf)
+
 
 ## Entities and Attributes:
-- Entity1: Attributes
-- Entity2: Attributes
+STUDENT
+Attributes: REG (PK), NAME, DOB, DEPT
+
+COURSE
+Attributes: COURSEID (PK), NAME, CREDITS
+
+PROGRAM
+Attributes: PROGRAM ID (PK), NAME, CREDIT/POINTS, BRANCHES
+
+COLLEGE
+Attributes: CID (PK), NAME, DEGREE
+
+FACULTY
+Attributes: FID (PK), NAME, BRANCH, EXPERIENCE
+
+UNIVERSITY (UNI)
+Attributes: Not explicitly shown, assumed to have a unique identifier like UID
+
+
 ...
 
 ## Relationships and Constraints:
-- Relationship1 (Cardinality, Participation)
-- Relationship2 (Cardinality, Participation)
+- ATTEMPTS (Between STUDENT and COURSE)
+
+GRADE
+
+SEM
+
+CREDITS
+
+ENROLL (Between STUDENT and PROGRAM)
+
+No attributes
+
+CONTAINS (Between PROGRAM and COURSE)
+
+No attributes
+
+HAS (Between COLLEGE and FACULTY)
+
+No attributes
+
+HAS (Between COLLEGE and UNI)
+
+No attributes
+
+HAS (Between UNI and FACULTY)
+
+No attributes
 ...
 
 ## Extension (Prerequisite / Billing):
-- Explain how you modeled prerequisites or billing.
+ATTEMPTS (STUDENT–COURSE)
+Attributes: SEM, GRADE, CREDITS
+
+Cardinality: M:N (Many students can attempt many courses)
+
+ENROLL (STUDENT–PROGRAM)
+Attributes: None
+
+Cardinality: M:N (Many students can enroll in many programs)
+
+CONTAINS (PROGRAM–COURSE)
+Attributes: None
+
+Cardinality: 1:N (One program contains many courses)
+
+HAS (COLLEGE–FACULTY)
+Attributes: None
+
+Cardinality: 1:N (A college can have many faculty members)
+
+HAS (COLLEGE–UNIVERSITY)
+Attributes: None
+
+Cardinality: M:1 (Many colleges belong to one university)
+
+HAS (UNIVERSITY–FACULTY)
+Attributes: None
+
+Cardinality: N:M (Faculty may be associated with multiple universities — though this is rare, so might be 1:N in some implementations)
+
+
 
 ## Design Choices:
-Brief explanation of why you chose certain entities, relationships, and assumptions
+Surrogate Keys like REG, COURSEID, PROGRAM ID, CID, and FID are used as unique identifiers.
 
+Multi-valued Relationships (like M:N in ATTEMPTS, ENROLL) are converted into associative entities with attributes.
+
+Normalization: Data appears normalized to reduce redundancy (e.g., separating PROGRAM and COURSE).
+
+Hierarchical Structure: UNIVERSITY → COLLEGE → FACULTY shows a top-down hierarchy.
+
+Attribute Placement: Attributes are placed meaningfully — e.g., SEM and GRADE are properties of ATTEMPTS, not of STUDENT or COURSE alone.
 ## RESULT
+Tables:
+STUDENT (REG, NAME, DOB, DEPT)
+
+COURSE (COURSEID, NAME, CREDITS)
+
+PROGRAM (PROGRAM ID, NAME, CREDIT_POINTS, BRANCHES)
+
+COLLEGE (CID, NAME, DEGREE)
+
+FACULTY (FID, NAME, BRANCH, EXPERIENCE)
+
+UNIVERSITY (UID, NAME) (Assumed attributes)
+
+Associative (Relation) Tables:
+ATTEMPTS (REG, COURSEID, SEM, GRADE, CREDITS)
+
+ENROLL (REG, PROGRAM ID)
+
+CONTAINS (PROGRAM ID, COURSEID)
+
+COLLEGE_UNI (CID, UID)
+
+COLLEGE_FACULTY (CID, FID)
+
+UNI_FACULTY (UID, FID) (if applicable)
