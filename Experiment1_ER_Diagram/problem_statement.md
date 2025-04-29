@@ -1,5 +1,5 @@
 # Experiment 1: Entity-Relationship (ER) Diagram
-
+# Name : Sachin K
 ## 🎯 Objective:
 To understand and apply the concepts of ER modeling by creating an ER diagram for a real-world application.
 
